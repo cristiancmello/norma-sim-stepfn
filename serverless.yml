@@ -13,6 +13,8 @@ provider:
 functions:
   fetch:
     handler: functions/fetch.handler
+  decode:
+    handler: functions/decode.handler
 
 stepFunctions:
   validate: true
@@ -27,6 +29,11 @@ stepFunctions:
             Type: Task
             Resource:
               Fn::GetAtt: [fetch, Arn]
+            Next: Decode
+          Decode:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [decode, Arn]
             Next: Halt
           Halt:
             Type: Pass

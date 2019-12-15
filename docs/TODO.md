@@ -6,4 +6,6 @@
   2.1 Defina a função lambda Fetch
 3. Escreva um script de test chamado test.sh testando examples/basic-program.sh
 4. Define o state 'Decode' como uma task para função lambda 'Decode'
+  4.1 Teste 'Decode' e note o novo output com "decoded" feito
+5. Define o state 'Execute' como Choice para se decidir entre pelo menos 1 instrução
 ```

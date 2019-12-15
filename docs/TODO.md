@@ -8,4 +8,7 @@
 4. Define o state 'Decode' como uma task para função lambda 'Decode'
   4.1 Teste 'Decode' e note o novo output com "decoded" feito
 5. Define o state 'Execute' como Choice para se decidir entre pelo menos 1 instrução
+6. Define o state 'dec' como uma task para função lambda 'dec'
+7. Faça choice 'dec' de 'Execute' apontar para state 'dec'
+8. Define o state 'VerifyNextInstruction' como uma task para função lambda 'VerifyNextInstruction'
 ```

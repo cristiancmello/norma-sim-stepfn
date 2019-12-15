@@ -15,6 +15,8 @@ functions:
     handler: functions/fetch.handler
   decode:
     handler: functions/decode.handler
+  dec:
+    handler: functions/dec.handler
 
 stepFunctions:
   validate: true
@@ -34,6 +36,17 @@ stepFunctions:
             Type: Task
             Resource:
               Fn::GetAtt: [decode, Arn]
+            Next: Execute
+          Execute:
+            Type: Choice
+            Choices:
+              - Variable: "$.body.decoded.inst"
+                StringEquals: "dec"
+                Next: dec
+          dec:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [dec, Arn]
             Next: Halt
           Halt:
             Type: Pass

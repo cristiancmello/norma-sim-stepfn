@@ -1,0 +1,33 @@
+
+service: lambda-norma
+
+plugins:
+  - serverless-step-functions
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  fetch:
+    handler: functions/fetch.handler
+
+stepFunctions:
+  validate: true
+  stateMachines:
+    lambdaNormaFn:
+      name: lambdaNormaStateMachine
+      definition:
+        Comment: "NORMA-like machine simulator"
+        StartAt: Fetch
+        States:
+          Fetch:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [fetch, Arn]
+            Next: Halt
+          Halt:
+            Type: Pass
+            End: true

@@ -1,0 +1,14 @@
+{
+  "body": {
+    "memory": {
+      "pc": 0,
+      "a": 2
+    },
+    "program": [
+      {
+        "inst": "dec",
+        "args": ["a"]
+      }
+    ]
+  }
+}

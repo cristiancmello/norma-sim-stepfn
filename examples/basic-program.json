@@ -8,6 +8,10 @@
       {
         "inst": "dec",
         "args": ["a"]
+      },
+      {
+        "inst": "dec",
+        "args": ["a"]
       }
     ]
   }

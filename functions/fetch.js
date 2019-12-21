@@ -1,6 +1,12 @@
 
 exports.handler = async (event) => {
-    const input = (JSON.parse(event)).body;
+    let input;
+    
+    try {
+        input = (JSON.parse(event)).body;
+    } catch (e) {
+        input = event.body
+    }
     
     input.fetched = input.program[input.memory.pc]
     

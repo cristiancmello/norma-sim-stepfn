@@ -61,6 +61,12 @@ stepFunctions:
               - Variable: "$.body.hasNextInst"
                 BooleanEquals: false
                 Next: Halt
+              - Variable: "$.body.hasNextInst"
+                BooleanEquals: true
+                Next: RepeatCycle
+          RepeatCycle:
+            Type: Pass
+            Next: Fetch
           Halt:
             Type: Pass
             End: true

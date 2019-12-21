@@ -14,4 +14,11 @@
 9. Define o state 'HasNextInstruction?' como uma Choice para Halt ou RepeatCycle
 10. Renomear test.sh para step-functions-start-execution-example.sh
 11. Criar test.sh
+12. Define o state 'RepeatCycle'
+13. Alterar o example para incluir mais 1 instrução para verificar se HasNextInstruction e RepeatCycle
+    estão funcionando
+    13.1 Percebemos que fetch.js começou a quebrar, pois não se esperava receber input json
+    partindo de uma função lambda. fetch.js estava esperando input json de CLI
+    13.2 Foi feito a correção utilizando try...catch no trecho com "const input = JSON.parse(...)"
+    13.3 Executado mais uma vez o test.sh e deu tudo certo!
 ```

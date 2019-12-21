@@ -1,14 +1,5 @@
 #!/bin/sh
 
-STATE_MACHINE=arn:aws:states:us-east-1:467742762527:stateMachine:lambdaNormaStateMachine
-INPUT_FILE=examples/basic-program.json
-INPUT_JSON_TEXT=$(jq '. | @json' examples/basic-program.json)
+DESCRIBE_EXECUTION_ARN_CMD=$(./step-functions-start-execution-example.sh)
 
-OUTPUT_EXECUTION_ARN=$(aws stepfunctions start-execution \
-    --state-machine-arn $STATE_MACHINE \
-    --input $INPUT_JSON_TEXT | jq --raw-output '.executionArn')
-
-OUTPUT_DESCRIBE_EXECUTION_ARN=$(aws stepfunctions describe-execution \
-    --execution-arn $OUTPUT_EXECUTION_ARN | jq --raw-output '.output')
-
-echo $OUTPUT_DESCRIBE_EXECUTION_ARN | jq '.'
+watch -n1 $DESCRIBE_EXECUTION_ARN_CMD

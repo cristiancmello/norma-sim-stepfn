@@ -17,6 +17,8 @@ functions:
     handler: functions/decode.handler
   dec:
     handler: functions/dec.handler
+  hasNextInstruction:
+    handler: functions/hasNextInstruction.handler
 
 stepFunctions:
   validate: true
@@ -47,7 +49,18 @@ stepFunctions:
             Type: Task
             Resource:
               Fn::GetAtt: [dec, Arn]
-            Next: Halt
+            Next: VerifyNextInstruction
+          VerifyNextInstruction:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [hasNextInstruction, Arn]
+            Next: HasNextInstruction?
+          HasNextInstruction?:
+            Type: Choice
+            Choices:
+              - Variable: "$.body.hasNextInst"
+                BooleanEquals: false
+                Next: Halt
           Halt:
             Type: Pass
             End: true

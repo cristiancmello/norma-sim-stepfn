@@ -2,7 +2,8 @@
   "body": {
     "memory": {
       "pc": 0,
-      "a": 2
+      "a": 2,
+      "b": 0
     },
     "program": [
       {
@@ -10,8 +11,8 @@
         "args": ["a"]
       },
       {
-        "inst": "dec",
-        "args": ["a"]
+        "inst": "beqz",
+        "args": ["a", -1, 0]
       }
     ]
   }

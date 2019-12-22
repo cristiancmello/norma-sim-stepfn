@@ -17,6 +17,10 @@ functions:
     handler: functions/decode.handler
   dec:
     handler: functions/dec.handler
+  inc:
+    handler: functions/inc.handler
+  beqz:
+    handler: functions/beqz.handler
   hasNextInstruction:
     handler: functions/hasNextInstruction.handler
 
@@ -45,10 +49,26 @@ stepFunctions:
               - Variable: "$.body.decoded.inst"
                 StringEquals: "dec"
                 Next: dec
+              - Variable: "$.body.decoded.inst"
+                StringEquals: "inc"
+                Next: inc
+              - Variable: "$.body.decoded.inst"
+                StringEquals: "beqz"
+                Next: beqz
           dec:
             Type: Task
             Resource:
               Fn::GetAtt: [dec, Arn]
+            Next: VerifyNextInstruction
+          inc:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [inc, Arn]
+            Next: VerifyNextInstruction
+          beqz:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [beqz, Arn]
             Next: VerifyNextInstruction
           VerifyNextInstruction:
             Type: Task
